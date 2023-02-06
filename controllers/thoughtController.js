@@ -19,7 +19,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Create a thought
-  createthought(req, res) {
+  createThought(req, res) {
     Thought.create(req.body)
       .then((thought) => {
         return User.findOneAndUpdate(
