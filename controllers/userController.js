@@ -36,24 +36,18 @@ module.exports = {
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
-  // Delete a student and remove them from the course
-  deleteStudent(req, res) {
-    Student.findOneAndRemove({ _id: req.params.studentId })
-      .then((student) =>
-        !student
-          ? res.status(404).json({ message: 'No such student exists' })
-          : Course.findOneAndUpdate(
-              { students: req.params.studentId },
-              { $pull: { students: req.params.studentId } },
-              { new: true }
+  // Delete a user and remove associated thoughts
+  deleteUser(req, res) {
+    User.findOneAndRemove({ _id: req.params.userId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: 'No such user exists' })
+          : Thought.deleteMany(
+              { _id: {$in: user.thoughts}}
             )
       )
-      .then((course) =>
-        !course
-          ? res.status(404).json({
-              message: 'Student deleted, but no courses found',
-            })
-          : res.json({ message: 'Student successfully deleted' })
+      .then(() =>
+          res.json({ message: 'Student successfully deleted' })
       )
       .catch((err) => {
         console.log(err);
@@ -61,6 +55,27 @@ module.exports = {
       });
   },
 
+  // Update user 
+  updateUser(req, res) {
+    User.findOneAndUpdate({ _id: req.params.userId }, 
+        {$set: req.body,},
+        {
+            runValidators: true,
+            new : true,
+        })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: 'No such user exists' })
+          : res.json(user)
+             
+            
+      )
+
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
   // Add an assignment to a student
   addAssignment(req, res) {
     console.log('You are adding an assignment');
