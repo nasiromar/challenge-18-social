@@ -1,0 +1,25 @@
+{
+  "name": "challenge-18-social",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nasiromar/challenge-18-social.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nasiromar/challenge-18-social/issues"
+  },
+  "homepage": "https://github.com/nasiromar/challenge-18-social#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongose": "^0.0.2-security"
+  }
+}

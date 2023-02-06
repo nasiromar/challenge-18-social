@@ -23,7 +23,7 @@ const reactionSchema = new Schema(
       default: Date.now(),
     },
     
-    reactions: [ reactionSchema ],
+    
       
   },
   {
