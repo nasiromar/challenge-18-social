@@ -21,11 +21,11 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
+      get: timeStamp => dateFormat (timestamp)
     },
-    
-    
-      
+
   },
+
   {
     toJSON: {
       getters: true,
